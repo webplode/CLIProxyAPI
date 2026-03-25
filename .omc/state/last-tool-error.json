@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"sed -i '' 's|github.com/router-for-me/CLIProxyAPI/v6|github.com/webplode/CLIProxyAPI/v6|g' go.mod && rtk find . -name \\\"*.go\\\" -not -path \\\"./.git/*\\\" -exec sed -i '' 's|github.com/router-...",
+  "error": "Exit code 1\nError: rtk find does not support compound predicates or actions (e.g. -not, -exec). Use `find` directly.",
+  "timestamp": "2026-03-25T02:29:53.835Z",
+  "retry_count": 1
+}

@@ -7,9 +7,9 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
-	"github.com/router-for-me/CLIProxyAPI/v6/internal/config"
-	cliproxyauth "github.com/router-for-me/CLIProxyAPI/v6/sdk/cliproxy/auth"
-	sdkconfig "github.com/router-for-me/CLIProxyAPI/v6/sdk/config"
+	"github.com/webplode/CLIProxyAPI/v6/internal/config"
+	cliproxyauth "github.com/webplode/CLIProxyAPI/v6/sdk/cliproxy/auth"
+	sdkconfig "github.com/webplode/CLIProxyAPI/v6/sdk/config"
 	"github.com/tidwall/gjson"
 )
 
