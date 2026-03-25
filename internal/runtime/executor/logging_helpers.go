@@ -6,23 +6,17 @@ import (
 	"fmt"
 	"html"
 	"net/http"
-	"os"
 	"sort"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/webplode/CLIProxyAPI/v6/internal/config"
-	"github.com/webplode/CLIProxyAPI/v6/internal/logging"
-	"github.com/webplode/CLIProxyAPI/v6/internal/util"
+	"github.com/router-for-me/CLIProxyAPI/v6/internal/config"
+	"github.com/router-for-me/CLIProxyAPI/v6/internal/logging"
+	"github.com/router-for-me/CLIProxyAPI/v6/internal/util"
 	log "github.com/sirupsen/logrus"
 	"github.com/tidwall/gjson"
 )
-
-var debugLogEnabled = sync.OnceValue(func() bool {
-	return strings.EqualFold(os.Getenv("DEBUG"), "true")
-})
 
 const (
 	apiAttemptsKey = "API_UPSTREAM_ATTEMPTS"
@@ -56,11 +50,7 @@ type upstreamAttempt struct {
 }
 
 // recordAPIRequest stores the upstream request metadata in Gin context for request logging.
-// When the DEBUG=true environment variable is set, it also logs the request to app logs.
 func recordAPIRequest(ctx context.Context, cfg *config.Config, info upstreamRequestLog) {
-	if debugLogEnabled() {
-		debugLogRequest(ctx, info)
-	}
 	if cfg == nil || !cfg.RequestLog {
 		return
 	}
@@ -108,9 +98,6 @@ func recordAPIRequest(ctx context.Context, cfg *config.Config, info upstreamRequ
 
 // recordAPIResponseMetadata captures upstream response status/header information for the latest attempt.
 func recordAPIResponseMetadata(ctx context.Context, cfg *config.Config, status int, headers http.Header) {
-	if debugLogEnabled() {
-		debugLogResponseMeta(ctx, status, headers)
-	}
 	if cfg == nil || !cfg.RequestLog {
 		return
 	}
@@ -401,38 +388,4 @@ func logWithRequestID(ctx context.Context) *log.Entry {
 		return log.NewEntry(log.StandardLogger())
 	}
 	return log.WithField("request_id", requestID)
-}
-
-// debugLogRequest logs upstream request details to app logs when DEBUG=true.
-func debugLogRequest(ctx context.Context, info upstreamRequestLog) {
-	entry := logWithRequestID(ctx)
-	var b strings.Builder
-	b.WriteString(fmt.Sprintf("\n=== DEBUG UPSTREAM REQUEST ===\n"))
-	b.WriteString(fmt.Sprintf("URL: %s\n", info.URL))
-	b.WriteString(fmt.Sprintf("Method: %s\n", info.Method))
-	if auth := formatAuthInfo(info); auth != "" {
-		b.WriteString(fmt.Sprintf("Auth: %s\n", auth))
-	}
-	b.WriteString("Headers:\n")
-	writeHeaders(&b, info.Headers)
-	b.WriteString("Body:\n")
-	if len(info.Body) > 0 {
-		b.WriteString(string(info.Body))
-	} else {
-		b.WriteString("<empty>")
-	}
-	b.WriteString("\n=== END UPSTREAM REQUEST ===")
-	entry.Info(b.String())
-}
-
-// debugLogResponseMeta logs upstream response status and headers to app logs when DEBUG=true.
-func debugLogResponseMeta(ctx context.Context, status int, headers http.Header) {
-	entry := logWithRequestID(ctx)
-	var b strings.Builder
-	b.WriteString(fmt.Sprintf("\n=== DEBUG UPSTREAM RESPONSE ===\n"))
-	b.WriteString(fmt.Sprintf("Status: %d\n", status))
-	b.WriteString("Headers:\n")
-	writeHeaders(&b, headers)
-	b.WriteString("=== END UPSTREAM RESPONSE ===")
-	entry.Info(b.String())
 }

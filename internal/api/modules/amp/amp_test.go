@@ -9,10 +9,10 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/webplode/CLIProxyAPI/v6/internal/api/modules"
-	"github.com/webplode/CLIProxyAPI/v6/internal/config"
-	sdkaccess "github.com/webplode/CLIProxyAPI/v6/sdk/access"
-	"github.com/webplode/CLIProxyAPI/v6/sdk/api/handlers"
+	"github.com/router-for-me/CLIProxyAPI/v6/internal/api/modules"
+	"github.com/router-for-me/CLIProxyAPI/v6/internal/config"
+	sdkaccess "github.com/router-for-me/CLIProxyAPI/v6/sdk/access"
+	"github.com/router-for-me/CLIProxyAPI/v6/sdk/api/handlers"
 )
 
 func TestAmpModule_Name(t *testing.T) {

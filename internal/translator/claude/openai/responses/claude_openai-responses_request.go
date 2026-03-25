@@ -9,8 +9,8 @@ import (
 	"strings"
 
 	"github.com/google/uuid"
-	"github.com/webplode/CLIProxyAPI/v6/internal/registry"
-	"github.com/webplode/CLIProxyAPI/v6/internal/thinking"
+	"github.com/router-for-me/CLIProxyAPI/v6/internal/registry"
+	"github.com/router-for-me/CLIProxyAPI/v6/internal/thinking"
 	"github.com/tidwall/gjson"
 	"github.com/tidwall/sjson"
 )

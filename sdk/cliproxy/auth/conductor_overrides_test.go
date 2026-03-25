@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/webplode/CLIProxyAPI/v6/internal/registry"
-	cliproxyexecutor "github.com/webplode/CLIProxyAPI/v6/sdk/cliproxy/executor"
+	"github.com/router-for-me/CLIProxyAPI/v6/internal/registry"
+	cliproxyexecutor "github.com/router-for-me/CLIProxyAPI/v6/sdk/cliproxy/executor"
 )
 
 func TestManager_ShouldRetryAfterError_RespectsAuthRequestRetryOverride(t *testing.T) {

@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/webplode/CLIProxyAPI/v6/sdk/cliproxy/usage"
+	"github.com/router-for-me/CLIProxyAPI/v6/sdk/cliproxy/usage"
 )
 
 func TestParseOpenAIUsageChatCompletions(t *testing.T) {
